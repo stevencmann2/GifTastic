@@ -5,7 +5,7 @@ const topics = ["guitar", "dogs", "basketball", "baseball", "craftbeer", "coffee
 
 // function that  creates buttons,. sources text from the array, and appends 
 function buttonPrint() {
-    for(let i = 0; i < topics.length; i++) {
+    for (let i = 0; i < topics.length; i++) {
         makeBtn = $("<button>");
         $("<button>").addClass("topics-buttons")
         textBtn = $("<button>").text(topics[i]);
@@ -15,25 +15,32 @@ function buttonPrint() {
 //prints buttons//
 buttonPrint();
 
+
+
+
 //user clicks
 $(".topics-buttons").click(userTopicsClick);
 //
 function userTopicsClick() {
     const clicked = $(this);
-};
+    //query URL
+    queryURL = `https://api.giphy.com/v1/gifs/search?q=${clicked.text()}&api_key=ABtjqgMUR0LmZ6Ko1afPtTLhUS0ktNlB&limit=10`; //using basketball in this example //MyKey= ABtjqgMUR0LmZ6Ko1afPtTLhUS0ktNlB
+    //page grabs 10 static (non animated) gif images
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function (response) {
+        //create div for staric images
+        const gifContainer = $("<div>");
+        const topicGifImages = response.data;
+        // create images to add to the div
+        for (i=0 ; i <length.topicGifImages; i++){
+        const gifAdder = $("<div>").append("<img src='"+topicGifImages[i].images.original_still.url"'");
+        };
+        //add images using Jquery
+        //().html(response.);//this is the locatoin I am using GUITAR in this example)
 
-//query URL
-
-queryURL = `https//wwww.api.giphy.com/v1/gifs/search?q=${topics[i]}&api_key=ABtjqgMUR0LmZ6Ko1afPtTLhUS0ktNlB`;             //MyKey= ABtjqgMUR0LmZ6Ko1afPtTLhUS0ktNlB
-//page grabs 10 static (non animated) git images
-
-function staticImages() {
-$.ajax({
-    url: queryURL,
-    method: "GET"
-  }).then(function(response) {
-
-};
-};
-//appends to page
-    
+        };
+    )};
+}:
+//appends to page */
