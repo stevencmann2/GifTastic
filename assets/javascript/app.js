@@ -2,7 +2,7 @@
 //console.log("this is linked");
 
 
-//things to fix: rating appending, clearing the type bar, animation and stop animation
+//things to fix: gifs continuouslt appending, clearing the type bar, animation and stop
 
 const topics = ["guitar", "dogs", "basketball", "baseball", "craftbeer", "coffee", "cooking", "camping", "travel", "biking", "fishing", ];
 
@@ -28,7 +28,6 @@ function createButtons() {
     // Deleting the images prior to adding new movies
     // (this is necessary otherwise you will have repeat buttons)
     $(".topics-div").empty();
-
     // Looping through the array of topics
     for (let i = 0; i < topics.length; i++) {
 
@@ -46,29 +45,24 @@ function createButtons() {
     }
 };
 
-
 // This function handles events where one button is clicked
 $("#add-keyword").on("click", function (event) {
     // Preventing the buttons default behavior when clicked (which is submitting a form)
     event.preventDefault();
     // This line grabs the input from the textbox
     const userInput = $("#topicSearchBar").val().trim();
-
     // Adding the topic from the textbox to our array
     topics.push(userInput);
     console.log(userInput);
-
     // Calling createButtons which handles the processing of topics array
     createButtons();
 
 });
-
 // Function for displaying the images 
 // adding a click event listener to all elements with the class "topics-buttons"
 // We're adding the event listener to the document because it will work for dynamically generated elements
 // $(".topics-buttons").on("click") will only add listeners to elements that are on the page at that time
 $(document).on("click", ".topics-buttons", alertTopicsKeyword);
-
 // Calling the renderButtons function to display the intial buttons
 createButtons();
 
@@ -76,8 +70,9 @@ createButtons();
 $(document).on('click', '.topics-buttons', userTopicsClick);
 
 function userTopicsClick() {
+    $(".images-holder").empty();
     const clicked = $(this);
-   
+    
     let queryURL = `https://api.giphy.com/v1/gifs/search?q=${clicked.text()}&api_key=ABtjqgMUR0LmZ6Ko1afPtTLhUS0ktNlB&limit=10`; //using basketball in this example //MyKey= ABtjqgMUR0LmZ6Ko1afPtTLhUS0ktNlB
     
     $.ajax({
@@ -91,27 +86,23 @@ function userTopicsClick() {
     
         for (i = 0; i < topicGifImages.length; i++) {
             //
-
         //animates gif URL
         let animatedImage = topicGifImages[i].images.fixed_height.url;
         
-            //console.log(animatedImage);
-            //give the base image the animatino attribute to be called later
-        
             //still image and text append
-            $(".images-holder").prepend("<img src= " + topicGifImages[i].images.fixed_height_still.url + " />"); 
+            $(".images-holder").prepend("<p>" + "Rating: "+ topicGifImages[i].rating+ "</p>" + "<img src= " + topicGifImages[i].images.fixed_height_still.url +" />"); 
             $("img").addClass("gifs");
-            gifRatings = $("<p>").text("Rating: " + topicGifImages[i].rating);   //this is showing up in the console but not on the page
-            $(".images-holder").append(gifRatings);
-            //console.log(gifRatings);
+            //gifRatings = $("<p>").text("Rating: " + topicGifImages[i].rating);   //this is showing up in the console but not on the page
+        
         };
         
     });
 };
-
+// "<img src= " + topicGifImages[i].images.fixed_height_still.url + " />"
 
 //creating click event to animate
 
+/*
 $(document).on("click", ".gifs", animate);
 
 function animate(){
@@ -126,7 +117,7 @@ function animate(){
 
 
 }
-
+*/
 
 //}
 
