@@ -4,20 +4,24 @@
 const topics = ["guitar", "dogs", "basketball", "baseball", "craftbeer", "coffee", "cooking", "camping", "travel", "biking", "fishing", ];
 
 // function that  creates buttons,. sources text from the array, and appends 
-function buttonPrint() {
+function initialbuttonPrint() {
     for (let i = 0; i < topics.length; i++) {
         makeBtn = $("<button>");
-        makeBtn.addClass("topics-buttons");
+        //makeBtn.addClass("topics-buttons");
         makeBtn.text(topics[i]);
         $(".topics-div").append(makeBtn);
     }
 };
 //prints buttons//
-buttonPrint();
+initialbuttonPrint();
 
-/*
+function alertTopicsKeyword() {
+    const topicsKeyword = $(this).attr("data-keyword");
 
-function createButton() {
+    alert(topicsKeyword);
+  };
+
+function createButtons() {
 
     // Deleting the movies prior to adding new movies
     // (this is necessary otherwise you will have repeat buttons)
@@ -32,16 +36,39 @@ function createButton() {
       // Adding a class of movie-btn to our button
       newBtn.addClass("topics-buttons");
       // Adding a data-attribute
-      newBtn.attr("data-name", topics[i]);
+      newBtn.attr("data-keyword", topics[i]);
       // Providing the initial button text
-      newBtn.text(movies[i]);
+      newBtn.text(topics[i]);
       // Adding the button to the buttons-view div
-      $("#buttons-view").append(newBtn);
+      $(".topics-div").append(newBtn);
     }
-  }
-*/
+  };
 
 
+
+      // This function handles events where one button is clicked
+      $("#add-keyword").on("click", function(event) {
+        // Preventing the buttons default behavior when clicked (which is submitting a form)
+        event.preventDefault();
+        // This line grabs the input from the textbox
+        const userInput = $("#topicSearchBar").val().trim();
+
+        // Adding the movie from the textbox to our array
+        topics.push(userInput);
+
+        // Calling renderButtons which handles the processing of our movie array
+        createButtons();
+
+      });
+
+      // Function for displaying the movie info
+      // We're adding a click event listener to all elements with the class "movie"
+      // We're adding the event listener to the document because it will work for dynamically generated elements
+      // $(".movies").on("click") will only add listeners to elements that are on the page at that time
+      $(document).on("click", ".topics-buttons", alertTopicsKeyword);
+
+      // Calling the renderButtons function to display the intial buttons
+    createButtons();
 
 
 
