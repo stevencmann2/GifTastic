@@ -22,23 +22,23 @@ function alertTopicsKeyword() {
 
 function createButtons() {
 
-    // Deleting the movies prior to adding new movies
+    // Deleting the images prior to adding new movies
     // (this is necessary otherwise you will have repeat buttons)
     $(".topics-div").empty();
 
-    // Looping through the array of movies
+    // Looping through the array of topics
     for (let i = 0; i < topics.length; i++) {
 
-        // Then dynamicaly generating buttons for each movie in the array
-        // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
+        // Then dynamicaly generating buttons for each topics and userInput in the array
+        
         const newBtn = $("<button>");
         // Adding a class of movie-btn to our button
         newBtn.addClass("topics-buttons");
-        // Adding a data-attribute
+        // Adding a data-attribute keyword
         newBtn.attr("data-keyword", topics[i]);
         // Providing the initial button text
         newBtn.text(topics[i]);
-        // Adding the button to the buttons-view div
+        // Adding the button to topics-div
         $(".topics-div").append(newBtn);
     }
 };
@@ -52,19 +52,19 @@ $("#add-keyword").on("click", function (event) {
     // This line grabs the input from the textbox
     const userInput = $("#topicSearchBar").val().trim();
 
-    // Adding the movie from the textbox to our array
+    // Adding the topic from the textbox to our array
     topics.push(userInput);
     console.log(userInput);
 
-    // Calling renderButtons which handles the processing of our movie array
+    // Calling createButtons which handles the processing of topics array
     createButtons();
 
 });
 
-// Function for displaying the movie info
-// We're adding a click event listener to all elements with the class "movie"
+// Function for displaying the images 
+// adding a click event listener to all elements with the class "topics-buttons"
 // We're adding the event listener to the document because it will work for dynamically generated elements
-// $(".movies").on("click") will only add listeners to elements that are on the page at that time
+// $(".topics-buttons").on("click") will only add listeners to elements that are on the page at that time
 $(document).on("click", ".topics-buttons", alertTopicsKeyword);
 
 // Calling the renderButtons function to display the intial buttons
