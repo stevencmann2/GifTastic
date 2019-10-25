@@ -1,6 +1,9 @@
 //Javascript form for GifTastic Project 
 //console.log("this is linked");
 
+
+//things to fix: rating appending, clearing the type bar, animation and stop animation
+
 const topics = ["guitar", "dogs", "basketball", "baseball", "craftbeer", "coffee", "cooking", "camping", "travel", "biking", "fishing", ];
 
 // function that  creates buttons,. sources text from the array, and appends 
@@ -44,7 +47,6 @@ function createButtons() {
 };
 
 
-
 // This function handles events where one button is clicked
 $("#add-keyword").on("click", function (event) {
     // Preventing the buttons default behavior when clicked (which is submitting a form)
@@ -82,18 +84,51 @@ function userTopicsClick() {
         url: queryURL,
         method: "GET"
     }).then(function (response) {
+        console.log(response);
+        console.log(queryURL);
 
         const topicGifImages = response.data;
     
         for (i = 0; i < topicGifImages.length; i++) {
+            //
+
+        //animates gif URL
+        let animatedImage = topicGifImages[i].images.fixed_height.url;
         
-            $(".images-holder").prepend("<img src= " + topicGifImages[i].images.original_still.url + " />"); //(name).append need to be existing HTML
+            //console.log(animatedImage);
+            //give the base image the animatino attribute to be called later
+        
+            //still image and text append
+            $(".images-holder").prepend("<img src= " + topicGifImages[i].images.fixed_height_still.url + " />"); 
             $("img").addClass("gifs");
+            gifRatings = $("<p>").text("Rating: " + topicGifImages[i].rating);   //this is showing up in the console but not on the page
+            $(".images-holder").append(gifRatings);
+            //console.log(gifRatings);
         };
         
     });
 };
 
+
+//creating click event to animate
+
+$(document).on("click", ".gifs", animate);
+
+function animate(){
+    let clickedGif = $(this);
+    const animatedImage= clickedGif.attr("data-animation", );
+    console.log(this);
+
+
+
+    
+
+
+
+}
+
+
+//}
 
 //setting up for click events to images
 /////$(document).on("click", ".gifs", animation);
