@@ -32,7 +32,7 @@ function createButtons() {
     for (let i = 0; i < topics.length; i++) {
 
         // Then dynamicaly generating buttons for each topics and userInput in the array
-        
+
         const newBtn = $("<button>");
         // Adding a class of movie-btn to our button
         newBtn.addClass("topics-buttons");
@@ -72,9 +72,9 @@ $(document).on('click', '.topics-buttons', userTopicsClick);
 function userTopicsClick() {
     $(".images-holder").empty();
     const clicked = $(this);
-    
+
     let queryURL = `https://api.giphy.com/v1/gifs/search?q=${clicked.text()}&api_key=ABtjqgMUR0LmZ6Ko1afPtTLhUS0ktNlB&limit=10`; //using basketball in this example //MyKey= ABtjqgMUR0LmZ6Ko1afPtTLhUS0ktNlB
-    
+
     $.ajax({
         url: queryURL,
         method: "GET"
@@ -83,54 +83,52 @@ function userTopicsClick() {
         console.log(queryURL);
 
         const topicGifImages = response.data;
-    
+
         for (i = 0; i < topicGifImages.length; i++) {
             //
-        //animates gif URL
-        let animatedImage = topicGifImages[i].images.fixed_height.url;
-        
+            //animates gif URL
+            // et animatedImage = topicGifImages[i].images.fixed_height.url;
+            console.log(i);
             //still image and text append
-            $(".images-holder").prepend("<p>" + "Rating: "+ topicGifImages[i].rating+ "</p>" + "<img src= " + topicGifImages[i].images.fixed_height_still.url +" />"); 
-            $("img").addClass("gifs");
+            gifDiv = $("<div>");
+            const ratingText = topicGifImages[i].rating
+            gifImg = $("<img>").attr("src", topicGifImages[i].images.fixed_height_still.url );
+            gifImg.attr("data-still", topicGifImages[i].images.fixed_height_still.url);
+            gifImg.attr("data-animated", topicGifImages[i].images.fixed_height.url);
+            gifDiv.addClass("gifs");
+            gifDiv.append("<p> Rating: " + ratingText + "</p>");
+            gifDiv.append(gifImg);
+            $(".images-holder").append(gifDiv);
+            
+
+            // when click switch the data attributes to animated
+
+          //  $(".images-holder").prepend("<p>" + "Rating: " + topicGifImages[i].rating + "</p>" + "<img src= " + topicGifImages[i].images.fixed_height_still.url + " />");
+          //  $("img").addClass("gifs");
+           // $().attr(data-fixed_height_stil)
             //gifRatings = $("<p>").text("Rating: " + topicGifImages[i].rating);   //this is showing up in the console but not on the page
-        
+
+
+            //this is the new sectoin where Ill try to aniumate the image
+
+
+
         };
-        
+
     });
+
 };
+
+
+$(document).on("click", ".gifs", animate);
+
+function animate() {
+    let clickedGif = $(this);
+    //const animatedImage = clickedGif.attr("src", topicGifImages[i].images.fixed_height_url);
+    //console.log(this); 
+
+};
+
 // "<img src= " + topicGifImages[i].images.fixed_height_still.url + " />"
 
 //creating click event to animate
-
-/*
-$(document).on("click", ".gifs", animate);
-
-function animate(){
-    let clickedGif = $(this);
-    const animatedImage= clickedGif.attr("data-animation", );
-    console.log(this);
-
-
-
-    
-
-
-
-}
-*/
-
-//}
-
-//setting up for click events to images
-/////$(document).on("click", ".gifs", animation);
-
-////$(document).on("click", ".gifs", Animation);
-
-////$(document).on("click", ".gifs", stopAnimation);
-
-
-
-
-/*
-
-//appends to page */
