@@ -93,6 +93,7 @@ function userTopicsClick() {
             gifDiv = $("<div>");
             const ratingText = topicGifImages[i].rating
             gifImg = $("<img>").attr("src", topicGifImages[i].images.fixed_height_still.url );
+            const state = gifImg.attr("data-state", "still");
             gifImg.attr("data-still", topicGifImages[i].images.fixed_height_still.url);
             gifImg.attr("data-animated", topicGifImages[i].images.fixed_height.url);
             gifDiv.addClass("gifs");
@@ -119,11 +120,12 @@ function userTopicsClick() {
 
 };
 
-
 $(document).on("click", ".gifs", animate);
 
 function animate() {
-    let clickedGif = $(this);
+    let playGifClick = $(this).attr("data-animated");
+   // console.log()
+
     //const animatedImage = clickedGif.attr("src", topicGifImages[i].images.fixed_height_url);
     //console.log(this); 
 
