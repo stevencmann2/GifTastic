@@ -100,19 +100,6 @@ function userTopicsClick() {
             gifDiv.append("<p> Rating: " + ratingText + "</p>");
             gifDiv.append(gifImg);
             $(".images-holder").append(gifDiv);
-            
-
-            // when click switch the data attributes to animated
-
-          //  $(".images-holder").prepend("<p>" + "Rating: " + topicGifImages[i].rating + "</p>" + "<img src= " + topicGifImages[i].images.fixed_height_still.url + " />");
-          //  $("img").addClass("gifs");
-           // $().attr(data-fixed_height_stil)
-            //gifRatings = $("<p>").text("Rating: " + topicGifImages[i].rating);   //this is showing up in the console but not on the page
-
-
-            //this is the new sectoin where Ill try to aniumate the image
-
-
 
         };
 
@@ -120,17 +107,16 @@ function userTopicsClick() {
 
 };
 
-$(document).on("click", ".gifs", animate);
+$(document).on("click", ".gifs", gifAnimate);
 
-function animate() {
-    let playGifClick = $(this).attr("data-animated");
-   // console.log()
-
-    //const animatedImage = clickedGif.attr("src", topicGifImages[i].images.fixed_height_url);
-    //console.log(this); 
-
-};
-
-// "<img src= " + topicGifImages[i].images.fixed_height_still.url + " />"
-
-//creating click event to animate
+function gifAnimate() {
+    let state = $(this).attr("data-state");
+    console.log(this);
+    if (state === "still") {
+        $(this).attr("src", $(this).attr("data-animated"));
+        $(this).attr("data-state", "animate");
+      } else {
+        $(this).attr("src", $(this).attr("data-still"));
+        $(this).attr("data-state", "still");
+      }
+    };
