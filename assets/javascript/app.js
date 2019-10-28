@@ -103,3 +103,8 @@ function gifAnimate() {
         $(this).attr("data-state", "still");
       }
     };
+
+
+
+
+    

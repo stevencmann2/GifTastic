@@ -1,7 +1,21 @@
+
+/* This is my custom css file*/
+
+/* This is my css additions*/
+body {
+    font-family: "Chalkduster";
+
+}
+
 .gifs{
     margin: 10px;
 }
 
 .topics-buttons {
     margin: 5px;
+    
+}
+
+p {
+   font-weight: bold;
 }
