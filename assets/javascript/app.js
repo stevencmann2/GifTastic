@@ -18,9 +18,9 @@ function initialbuttonPrint() {
 //prints buttons//
 initialbuttonPrint();
 
-function alertTopicsKeyword() {
+function TopicsKeywordData() {
     const topicsKeyword = $(this).attr("data-keyword");
-    alert(topicsKeyword);
+    //alert(topicsKeyword);
 };
 
 function createButtons() {
@@ -62,7 +62,7 @@ $("#add-keyword").on("click", function (event) {
 // adding a click event listener to all elements with the class "topics-buttons"
 // We're adding the event listener to the document because it will work for dynamically generated elements
 // $(".topics-buttons").on("click") will only add listeners to elements that are on the page at that time
-$(document).on("click", ".topics-buttons", alertTopicsKeyword);
+$(document).on("click", ".topics-buttons", TopicsKeywordData);
 // Calling the renderButtons function to display the intial buttons
 createButtons();
 
@@ -96,7 +96,7 @@ function userTopicsClick() {
             const state = gifImg.attr("data-state", "still");
             gifImg.attr("data-still", topicGifImages[i].images.fixed_height_still.url);
             gifImg.attr("data-animated", topicGifImages[i].images.fixed_height.url);
-            gifDiv.addClass("gifs");
+            gifImg.addClass("gifs");
             gifDiv.append("<p> Rating: " + ratingText + "</p>");
             gifDiv.append(gifImg);
             $(".images-holder").append(gifDiv);
@@ -107,7 +107,7 @@ function userTopicsClick() {
 
 };
 
-$(document).on("click", ".gifs", gifAnimate);
+$(".images-holder").on("click", ".gifs", gifAnimate);
 
 function gifAnimate() {
     let state = $(this).attr("data-state");
